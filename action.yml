@@ -1,0 +1,19 @@
+# action.yml
+name: 'Git remote sha'
+description: 'Retrieve the sha from a remote git repository'
+inputs:
+  token:  # username to use
+    description: 'Github token'
+    required: true
+  dispatch:  # username to use
+    description: 'JSON array of workflows to trigger'
+    required: true
+outputs:
+  sha:
+    description: 'sha of the repository/branch'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.token }}
+    - ${{ inputs.dispatch }}
