@@ -29,12 +29,23 @@ trigger_dispatches() {
     BRANCH=`echo ${dispatch} | jq -r '.branch'`
     WORKFLOW=`echo ${dispatch} | jq -r '.workflow'`
 
-    curl \
+    _post_data(){
+      cat <<EOF
+      {"ref": "refs/heads/${BRANCH}"}
+EOF
+    }
+
+    echo "::group::$REPO"
+    echo "Triggering $WORKFLOW for $REPO."
+    echo "::endgroup::"
+
+    curl -qs \
      -X POST \
      -H "Accept: application/vnd.github.v3+json" \
      -H "Authorization: token ${GIT_TOKEN}" \
      https://api.github.com/repos/${ORG}/${REPO}/actions/workflows/${WORKFLOW}/dispatches \
-     -d '{"ref": "refs/heads/${BRANCH}"}'
+     -d "$(_post_data)"
+
   done
 
 }
