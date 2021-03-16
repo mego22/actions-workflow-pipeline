@@ -1,5 +1,5 @@
 # action.yml
-name: 'Git remote sha'
+name: 'Workflow pipeline'
 description: 'Retrieve the sha from a remote git repository'
 inputs:
   token:  # username to use
