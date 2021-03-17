@@ -1,0 +1,19 @@
+name: Test changes
+on: 
+  pull_request:
+    branches:
+      - master
+  push:
+
+jobs:
+  test_action:
+    
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger pipeline
+        uses: mego22/actions-workflow-pipeline@post-data
+        with:
+          token: "${{ secrets.TOKEN }}"
+          dispatch: '[{"org": "mego22" ,"repo": "actions-workflow-pipeline", "branch": "main", "workflow": "trigger1.yml"}, 
+                      {"org": "mego22" ,"repo": "actions-workflow-pipeline", "branch": "main", "workflow": "trigger2.yml"}]'
