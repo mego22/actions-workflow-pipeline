@@ -1,0 +1,12 @@
+name: Trigger1
+on:  [workflow_dispatch]
+
+jobs:
+  test_action:
+    if: github.event_name == 'workflow_dispatch'
+    
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Workflow triggered
+        run: "echo 'success'"
