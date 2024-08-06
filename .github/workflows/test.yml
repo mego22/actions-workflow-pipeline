@@ -5,6 +5,12 @@ on:
       - master
   push:
 
+  workflow_dispatch:
+
+  # 11pm UTC; 7/8am EST/EDT
+  schedule:
+   - cron: '0 11 * * *'
+
 jobs:
   test_action:
     
@@ -12,7 +18,7 @@ jobs:
 
     steps:
       - name: Trigger pipeline
-        uses: mego22/actions-workflow-pipeline@post-data
+        uses: mego22/actions-workflow-pipeline@fix-update-workflow_dispatch-call
         with:
           token: "${{ secrets.TOKEN }}"
           dispatch: '[{"org": "mego22" ,"repo": "actions-workflow-pipeline", "branch": "main", "workflow": "trigger1.yml"}, 

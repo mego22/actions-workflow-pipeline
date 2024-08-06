@@ -21,6 +21,7 @@ check_commands() {
 }
 
 
+# https://docs.github.com/en/rest/actions/workflows?apiVersion=2022-11-28#create-a-workflow-dispatch-event
 trigger_dispatches() {
   for dispatch in `echo "${DISPATCHES}" | jq -c .[]`
   do
@@ -39,10 +40,11 @@ EOF
     echo "Triggering $WORKFLOW for $REPO."
     echo "::endgroup::"
 
-    curl -qs \
+    curl -L \
      -X POST \
-     -H "Accept: application/vnd.github.v3+json" \
-     -H "Authorization: token ${GIT_TOKEN}" \
+     -H "Accept: application/vnd.github+json" \
+     -H "Authorization: Bearer ${GIT_TOKEN}" \
+     -H "X-GitHub-Api-Version: 2022-11-28" \
      https://api.github.com/repos/${ORG}/${REPO}/actions/workflows/${WORKFLOW}/dispatches \
      -d "$(_post_data)"
 

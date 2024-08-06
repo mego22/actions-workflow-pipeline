@@ -1,6 +1,9 @@
 # actions-workflow-pipeline
 Trigger additional workflows
 
+Github docs for the action:
+https://docs.github.com/en/rest/actions/workflows?apiVersion=2022-11-28#create-a-workflow-dispatch-event
+
 ## Usage
 ### Trigger one or more workflows
 ```
